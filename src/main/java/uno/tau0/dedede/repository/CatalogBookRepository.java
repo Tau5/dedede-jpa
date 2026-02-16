@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CatalogBookRepository extends ListCrudRepository<CatalogBook, String> {
     @NativeQuery("select distinct cb.* from CatalogBook as cb" +
-            "join book on book.book_isbn = cb.isbn where book.id not in (select book_id from commodate c where c.book_id = book.id and returned = false)\n")
+            "join book on book.book_isbn = cb.isbn where book.id not in (select book_id from commodate c where c.book_id = book.id and returned = false);")
     List<CatalogBook> findWhereAnyBookFree();
 }

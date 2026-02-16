@@ -15,8 +15,7 @@ import java.util.List;
 
 public class BorrowBooksView implements View {
     private User user;
-    public BorrowBooksView(User user,
-                           ) {
+    public BorrowBooksView(User user) {
         this.user = user;
     }
 
@@ -29,33 +28,29 @@ public class BorrowBooksView implements View {
         List<Book> listBookAvaible;
         System.out.println("Lista de libros que no estan prestados");
 
-        try {
-            listBook = catalog.findAllList();
-            listBook.forEach(b -> System.out.println(b));
-            System.out.print("Elige el ISBN del libro que prestar:");
-            var id = MenuHelper.sc.nextLine();
-            catalog.findByIdOptional(id).ifPresent(cb -> {
-                try {
-                    var libros = catalogService.getAvailableBooksForCatalogBook(cb);
+        listBook = catalog.findAll();
+        listBook.forEach(b -> System.out.println(b));
+        System.out.print("Elige el ISBN del libro que prestar:");
+        var id = MenuHelper.sc.nextLine();
+        catalog.findById(id).ifPresent(cb -> {
+            try {
+                var libros = catalogService.getAvailableBooksForCatalogBook(cb);
 
-                    if (libros.size() < 1) {
-                        System.out.println("No hay libros disponibles para ese libro");
-                    } else {
-                        var libro = libros.getFirst();
-                        try {
-                            bookService.borrowBook(libro, user);
-                        } catch (BookService.BookAlreadyBorrowedException e) {
-                            System.out.println("No se ha podido prestar: " + e.getMessage());
-                        }
+                if (libros.size() < 1) {
+                    System.out.println("No hay libros disponibles para ese libro");
+                } else {
+                    var libro = libros.getFirst();
+                    try {
+                        bookService.borrowBook(libro, user);
+                    } catch (BookService.BookAlreadyBorrowedException e) {
+                        System.out.println("No se ha podido prestar: " + e.getMessage());
                     }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
-            });
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        });
         viewManager.switchView(new UserHomeView(user));
     }
 }

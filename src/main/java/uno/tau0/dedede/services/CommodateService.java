@@ -38,9 +38,13 @@ public class CommodateService {
     }
 
     public Commodate registerCommodate(Book book, User user) throws SQLException {
-        return commodateRepository.save(
-                new Commodate(-1, Instant.now(), Instant.now().plus(15, ChronoUnit.DAYS), user.getID(), book.getID())
-        );
+        var commodate = new Commodate();
+        commodate.setBook(book);
+        commodate.setUser(user);
+        commodate.setIssueDate(Instant.now());
+        commodate.setPeriodEnd(Instant.now().plus(15, ChronoUnit.DAYS));
+        commodate.setReturned(false);
+        return commodateRepository.save(commodate);
     }
 
     public List<Commodate> getCommodatesForUser(User user) throws SQLException {

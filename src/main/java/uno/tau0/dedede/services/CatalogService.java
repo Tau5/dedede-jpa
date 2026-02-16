@@ -24,13 +24,8 @@ public class CatalogService {
 
     public CatalogService() {}
 
-    // Altamente ineficiente pero no me voy a poner a optimizarlo, ya lo haremos bien con JPA
-    public List<Book> getAvailableBooksForCatalogBook(CatalogBook catalogBook) throws SQLException {
-        return   bookService.getBooksForCatalogBook(catalogBook)
-                .stream()
-                .filter(b -> !(bookService.isBookBorrowed(b)))
-                .toList();
-
+    public List<Book> getAvailableBooksForCatalogBook(CatalogBook catalogBook) {
+        return bookRepository.findByCatalogBookIsbn(catalogBook.getIsbn());
     }
 
     public void createCatalogBookWithStock(CatalogBook catalogBook, int stock) throws SQLException {

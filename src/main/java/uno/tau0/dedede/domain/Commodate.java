@@ -9,6 +9,7 @@ import java.time.Instant;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Commodate {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -16,17 +17,18 @@ public class Commodate {
 
     @OneToOne
     @JoinColumn(name = "book")
-    @Getter
+    @Getter @Setter
     private Book book;
 
-    @ManyToOne @Getter
+    @ManyToOne @Getter @Setter
     @JoinColumn(name = "libraryUser")
     private User user;
 
-    @Getter
+    @Getter @Setter
     private Instant issueDate;
-    @Getter
+    @Getter @Setter
     private Instant periodEnd;
+    @Getter @Setter
     private Boolean returned;
 
     public boolean isActive() {

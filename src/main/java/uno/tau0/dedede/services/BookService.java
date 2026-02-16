@@ -36,16 +36,7 @@ public class BookService {
     }
 
     public boolean userHasAlreadyBorrowedACopy(Book book, User user) throws SQLException {
-        var commodates = commodateService.getCommodatesForUser(user);
-        for (var commodate : commodates) {
-            if (commodate.isActive()) {
-                if (commodateService.getBookForCommodate(commodate).getBookISBN().equals(book.getBookISBN())) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return !commodateRepository.findByUserIdAndIsbnWhereReturnedIsFalse(user.getId(), book.getCatalogBook().getIsbn()).isEmpty();
     }
 
     public class BookAlreadyBorrowedException extends RuntimeException {
