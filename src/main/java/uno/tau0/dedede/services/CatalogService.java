@@ -1,0 +1,45 @@
+package uno.tau0.dedede.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.NativeQuery;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Service;
+import uno.tau0.dedede.domain.Book;
+import uno.tau0.dedede.domain.CatalogBook;
+import uno.tau0.dedede.repository.BookRepository;
+import uno.tau0.dedede.repository.CatalogBookRepository;
+import uno.tau0.dedede.view.Model;
+
+import java.sql.SQLException;
+import java.util.List;
+
+@Service
+public class CatalogService {
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private CatalogBookRepository catalogBookRepository;
+    @Autowired
+    private BookRepository bookRepository;
+
+    public CatalogService() {}
+
+    // Altamente ineficiente pero no me voy a poner a optimizarlo, ya lo haremos bien con JPA
+    public List<Book> getAvailableBooksForCatalogBook(CatalogBook catalogBook) throws SQLException {
+        return   bookService.getBooksForCatalogBook(catalogBook)
+                .stream()
+                .filter(b -> !(bookService.isBookBorrowed(b)))
+                .toList();
+
+    }
+
+    public void createCatalogBookWithStock(CatalogBook catalogBook, int stock) throws SQLException {
+       catalogBookRepository.save(catalogBook);
+       for (int i = 0; i < stock; i++) {
+           bookRepository.save(
+                   new Book(-1L, catalogBook.getISBN())
+           );
+       }
+    }
+
+}

@@ -1,4 +1,4 @@
-package uno.tau0.dedede;
+package uno.tau0.dedede.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long ID;
-    @ManyToOne
+    @ManyToOne @Getter
     @JoinColumn(name = "book_isbn")
     private CatalogBook catalogBook;
 }
