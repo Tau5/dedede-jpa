@@ -37,7 +37,7 @@ public class CommodateService {
         }
     }
 
-    public Commodate registerCommodate(Book book, User user) throws SQLException {
+    public Commodate registerCommodate(Book book, User user) {
         var commodate = new Commodate();
         commodate.setBook(book);
         commodate.setUser(user);

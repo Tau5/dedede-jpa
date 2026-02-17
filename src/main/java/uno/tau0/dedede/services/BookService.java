@@ -21,7 +21,7 @@ public class BookService {
         return !commodateRepository.findByBookIdWhereReturnedIsFalse(book.getID()).isEmpty();
     }
 
-    public Commodate borrowBook(Book book, User user) throws SQLException, BookAlreadyBorrowedException {
+    public Commodate borrowBook(Book book, User user) throws BookAlreadyBorrowedException {
         if (isBookBorrowed(book)) {
             throw new BookAlreadyBorrowedException("Esta copia ya está prestada");
         } else if (userHasAlreadyBorrowedACopy(book, user)) {
@@ -35,7 +35,7 @@ public class BookService {
         return bookRepository.findAllList().stream().filter(b -> b.getBookISBN().equals(catalogBook.getISBN())).toList();
     }
 
-    public boolean userHasAlreadyBorrowedACopy(Book book, User user) throws SQLException {
+    public boolean userHasAlreadyBorrowedACopy(Book book, User user) {
         return !commodateRepository.findByUserIdAndIsbnWhereReturnedIsFalse(user.getId(), book.getCatalogBook().getIsbn()).isEmpty();
     }
 
