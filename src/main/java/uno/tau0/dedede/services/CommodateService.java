@@ -25,18 +25,6 @@ public class CommodateService {
         this.bookRepository = model.books;
     }
 
-    public List<Commodate> getCommodatesForBook(Book book) {
-        try {
-            return commodateRepository
-                    .findAllList()
-                    .stream()
-                    .filter(c -> c.getBookID() == book.getID())
-                    .toList();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public Commodate registerCommodate(Book book, User user) {
         var commodate = new Commodate();
         commodate.setBook(book);
@@ -49,10 +37,6 @@ public class CommodateService {
 
     public List<Commodate> getCommodatesForUser(User user) throws SQLException {
         return commodateRepository.findByUserId(user.getId());
-    }
-
-    public Book getBookForCommodate(Commodate commodate) throws SQLException {
-        return bookRepository.findById(commodate.getBookID());
     }
 
     public CatalogBook getCatalogBookForCommodate(Commodate commodate) throws SQLException {

@@ -5,9 +5,6 @@ import uno.tau0.dedede.repository.*;
 import uno.tau0.dedede.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-import java.util.List;
-
 @Service
 public class BookService {
     @Autowired
@@ -29,10 +26,6 @@ public class BookService {
         } else {
             return commodateService.registerCommodate(book, user);
         }
-    }
-
-    public List<Book> getBooksForCatalogBook(CatalogBook catalogBook) throws SQLException {
-        return bookRepository.findAllList().stream().filter(b -> b.getBookISBN().equals(catalogBook.getISBN())).toList();
     }
 
     public boolean userHasAlreadyBorrowedACopy(Book book, User user) {
