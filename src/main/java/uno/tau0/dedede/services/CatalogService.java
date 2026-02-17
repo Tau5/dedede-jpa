@@ -28,12 +28,13 @@ public class CatalogService {
         return bookRepository.findByCatalogBookIsbn(catalogBook.getIsbn());
     }
 
-    public void createCatalogBookWithStock(CatalogBook catalogBook, int stock) throws SQLException {
+    public void createCatalogBookWithStock(CatalogBook catalogBook, int stock) {
        catalogBookRepository.save(catalogBook);
        for (int i = 0; i < stock; i++) {
-           bookRepository.save(
-                   new Book(-1L, catalogBook.getISBN())
-           );
+           var book = new Book();
+           book.setCatalogBook(catalogBook);
+
+           bookRepository.save(book);
        }
     }
 

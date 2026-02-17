@@ -12,11 +12,7 @@ public class ListBooksView implements View {
     public void run(Model model, ViewManager viewManager) {
 
         var books = model.catalog;
-        try {
-            books.findAllList().forEach(System.out::println);
-        } catch (SQLException e) {
-            System.out.println("No se han podido encontrar los libros (" + e.getLocalizedMessage() +")");
-        }
+        books.findAll().forEach(System.out::println);
         viewManager.switchView(new ViewBibliotecario());
     }
 }
