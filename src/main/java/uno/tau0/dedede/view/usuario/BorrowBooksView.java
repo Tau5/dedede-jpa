@@ -28,7 +28,7 @@ public class BorrowBooksView implements View {
         List<Book> listBookAvaible;
         System.out.println("Lista de libros que no estan prestados");
 
-        listBook = catalog.findAll();
+        listBook = catalog.findWhereAnyBookFree();
         listBook.forEach(b -> System.out.println(b));
         System.out.print("Elige el ISBN del libro que prestar:");
         var id = MenuHelper.sc.nextLine();
