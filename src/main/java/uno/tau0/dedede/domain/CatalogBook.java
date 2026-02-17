@@ -17,4 +17,9 @@ public class CatalogBook {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "catalogBook")
     public Set<Book> books;
+
+    @Override
+    public String toString() {
+        return "[" + isbn + "] " + title + " por " + "author";
+    }
 }

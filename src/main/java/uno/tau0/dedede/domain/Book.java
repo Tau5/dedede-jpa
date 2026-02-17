@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private Long ID;
+    private Long id;
     @ManyToOne @Getter @Setter
     @JoinColumn(name = "book_isbn")
     private CatalogBook catalogBook;

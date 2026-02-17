@@ -2,6 +2,8 @@ package uno.tau0.dedede.repository;
 
 import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import uno.tau0.dedede.domain.Book;
 
 import java.util.List;

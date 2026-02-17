@@ -25,7 +25,8 @@ public class CatalogService {
     public CatalogService() {}
 
     public List<Book> getAvailableBooksForCatalogBook(CatalogBook catalogBook) {
-        return bookRepository.findByCatalogBookIsbn(catalogBook.getIsbn());
+        //return bookRepository.findByCatalogBookIsbn(catalogBook.getIsbn());
+        return bookRepository.findAll();
     }
 
     public void createCatalogBookWithStock(CatalogBook catalogBook, int stock) {

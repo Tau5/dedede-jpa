@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class AddLibroView implements View {
     @Override
     public void run(Model model, ViewManager viewManager) {
-        CatalogService service = new CatalogService();
+        CatalogService service = viewManager.getBean(CatalogService.class);
         System.out.print("Título: ");
         String title = MenuHelper.sc.nextLine();
 

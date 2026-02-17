@@ -22,8 +22,8 @@ public class BorrowBooksView implements View {
     @Override
     public void run(Model model, ViewManager viewManager) {
         var catalog = model.catalog;
-        var catalogService = new CatalogService();
-        var bookService = new BookService();
+        var catalogService = viewManager.getBean(CatalogService.class);
+        var bookService = viewManager.getBean(BookService.class);
         List<CatalogBook> listBook;
         List<Book> listBookAvaible;
         System.out.println("Lista de libros que no estan prestados");
@@ -33,7 +33,6 @@ public class BorrowBooksView implements View {
         System.out.print("Elige el ISBN del libro que prestar:");
         var id = MenuHelper.sc.nextLine();
         catalog.findById(id).ifPresent(cb -> {
-            try {
                 var libros = catalogService.getAvailableBooksForCatalogBook(cb);
 
                 if (libros.size() < 1) {
@@ -46,10 +45,6 @@ public class BorrowBooksView implements View {
                         System.out.println("No se ha podido prestar: " + e.getMessage());
                     }
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
         });
         viewManager.switchView(new UserHomeView(user));
     }

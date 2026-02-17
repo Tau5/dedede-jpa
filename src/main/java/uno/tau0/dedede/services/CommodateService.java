@@ -1,5 +1,6 @@
 package uno.tau0.dedede.services;
 
+import org.springframework.stereotype.Service;
 import uno.tau0.dedede.domain.Book;
 import uno.tau0.dedede.domain.CatalogBook;
 import uno.tau0.dedede.domain.Commodate;
@@ -14,6 +15,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+@Service
 public class CommodateService {
     CommodateRepository commodateRepository;
     CatalogBookRepository catalogBookRepository;

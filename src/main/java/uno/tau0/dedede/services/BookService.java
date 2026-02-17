@@ -15,7 +15,7 @@ public class BookService {
     private CommodateRepository commodateRepository;
 
     public boolean isBookBorrowed(Book book) {
-        return !commodateRepository.findByBookIdWhereReturnedIsFalse(book.getID()).isEmpty();
+        return !commodateRepository.findByBookIdWhereReturnedIsFalse(book.getId()).isEmpty();
     }
 
     public Commodate borrowBook(Book book, User user) throws BookAlreadyBorrowedException {

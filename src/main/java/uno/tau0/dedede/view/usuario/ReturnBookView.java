@@ -20,7 +20,7 @@ public class ReturnBookView implements View {
     @Override
     public void run(Model model, ViewManager viewManager) {
         var commodateM = model.commodates;
-        var commodateService = new CommodateService(model);
+        var commodateService = viewManager.getBean(CommodateService.class);
         List<Commodate> commodatesList;
 
         System.out.println("Libros que puede devolver:");
