@@ -10,6 +10,7 @@ import uno.tau0.dedede.view.ViewManager;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 public class ReturnBookView implements View {
     private User user;
@@ -21,11 +22,11 @@ public class ReturnBookView implements View {
     public void run(Model model, ViewManager viewManager) {
         var commodateM = model.commodates;
         var commodateService = viewManager.getBean(CommodateService.class);
-        List<Commodate> commodatesList;
+        Set<Commodate> commodatesList;
 
         System.out.println("Libros que puede devolver:");
         try {
-            commodatesList = commodateService.getCommodatesForUser(user);
+            commodatesList = user.commodates;
             for (Commodate commodate : commodatesList) {
                 System.out.println(commodate.getId() + " " + commodateService.getCatalogBookForCommodate(commodate));
             }

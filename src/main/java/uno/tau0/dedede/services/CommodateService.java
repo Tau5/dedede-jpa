@@ -37,10 +37,6 @@ public class CommodateService {
         return commodateRepository.save(commodate);
     }
 
-    public List<Commodate> getCommodatesForUser(User user) throws SQLException {
-        return commodateRepository.findByUserId(user.getId());
-    }
-
     public CatalogBook getCatalogBookForCommodate(Commodate commodate) throws SQLException {
         return commodate.getBook().getCatalogBook();
     }
