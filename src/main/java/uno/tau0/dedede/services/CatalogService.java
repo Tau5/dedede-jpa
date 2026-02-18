@@ -28,7 +28,7 @@ public class CatalogService {
     public CatalogService() {}
 
     public List<Book> getAvailableBooksForCatalogBook(CatalogBook catalogBook) {
-        return bookRepository.findByCatalogBookIsbn(catalogBook.getIsbn());
+        return bookRepository.findByIsbnWhereBookIsFree(catalogBook.getIsbn());
     }
 
     public void createCatalogBookWithStock(CatalogBook catalogBook, int stock) {
