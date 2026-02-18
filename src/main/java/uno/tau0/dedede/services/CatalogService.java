@@ -8,6 +8,7 @@ import uno.tau0.dedede.domain.Book;
 import uno.tau0.dedede.domain.CatalogBook;
 import uno.tau0.dedede.repository.BookRepository;
 import uno.tau0.dedede.repository.CatalogBookRepository;
+import uno.tau0.dedede.repository.CommodateRepository;
 import uno.tau0.dedede.view.Model;
 
 import java.sql.SQLException;
@@ -21,6 +22,8 @@ public class CatalogService {
     private CatalogBookRepository catalogBookRepository;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private CommodateRepository commodateRepository;
 
     public CatalogService() {}
 
@@ -29,13 +32,13 @@ public class CatalogService {
     }
 
     public void createCatalogBookWithStock(CatalogBook catalogBook, int stock) {
-       catalogBookRepository.save(catalogBook);
-       for (int i = 0; i < stock; i++) {
-           var book = new Book();
-           book.setCatalogBook(catalogBook);
+        catalogBookRepository.save(catalogBook);
+        for (int i = 0; i < stock; i++) {
+            var book = new Book();
+            book.setCatalogBook(catalogBook);
 
-           bookRepository.save(book);
-       }
+            bookRepository.save(book);
+        }
     }
 
 }

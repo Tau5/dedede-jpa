@@ -13,4 +13,6 @@ public interface BookRepository extends ListCrudRepository<Book, Long> {
 
     @NativeQuery("select * from book where book.book_isbn = ?1 and book.id not in (select book_id from commodate c where c.book_id = book.id and returned = false);")
     List<Book> findByIsbnWhereBookIsFree(String isbn);
+
+
 }
