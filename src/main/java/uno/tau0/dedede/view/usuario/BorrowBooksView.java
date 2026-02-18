@@ -39,7 +39,7 @@ public class BorrowBooksView implements View {
         listBook.forEach(b -> System.out.println(b));
         System.out.print("Elige el ISBN del libro que prestar:");
         var id = MenuHelper.sc.nextLine();
-        catalog.findById(id).ifPresent(cb -> {
+        catalog.findById(id).ifPresentOrElse(cb -> {
                 var libros = catalogService.getAvailableBooksForCatalogBook(cb);
 
                 if (libros.size() < 1) {
@@ -52,6 +52,9 @@ public class BorrowBooksView implements View {
                         System.out.println("No se ha podido prestar: " + e.getMessage());
                     }
                 }
+        },
+        () -> {
+            System.out.println("No se ha encontrado un libro con ese ID");
         });
         viewManager.switchView(new UserHomeView(user));
     }
