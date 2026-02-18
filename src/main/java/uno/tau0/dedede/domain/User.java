@@ -20,6 +20,6 @@ public class User {
     @Getter @Setter
     public String surname;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     public Set<Commodate> commodates;
 }

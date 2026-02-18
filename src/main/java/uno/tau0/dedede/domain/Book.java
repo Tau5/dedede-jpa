@@ -15,7 +15,7 @@ public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @Getter @Setter
     @JoinColumn(name = "book_isbn")
     private CatalogBook catalogBook;

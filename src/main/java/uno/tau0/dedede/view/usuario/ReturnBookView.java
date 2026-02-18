@@ -25,14 +25,12 @@ public class ReturnBookView implements View {
         Set<Commodate> commodatesList;
 
         System.out.println("Libros que puede devolver:");
-        try {
-            commodatesList = user.commodates;
-            for (Commodate commodate : commodatesList) {
-                System.out.println(commodate.getId() + " " + commodateService.getCatalogBookForCommodate(commodate));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+        commodatesList = user.commodates;
+        for (Commodate commodate : commodatesList) {
+            System.out.println(commodate.getId() + " " + commodate.getBook().getCatalogBook());
         }
+
         var id = MenuHelper.getNumber("Ingresa el id del libro que quieres devolver:");
 
         commodatesList.forEach(commodate -> {

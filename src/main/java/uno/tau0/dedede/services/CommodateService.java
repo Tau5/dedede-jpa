@@ -36,9 +36,4 @@ public class CommodateService {
         commodate.setReturned(false);
         return commodateRepository.save(commodate);
     }
-
-    public CatalogBook getCatalogBookForCommodate(Commodate commodate) throws SQLException {
-        return commodate.getBook().getCatalogBook();
-    }
-
 }

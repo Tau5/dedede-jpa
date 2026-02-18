@@ -15,7 +15,7 @@ public class CatalogBook {
     @NonNull private String title;
     @NonNull private String author;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogBook", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "catalogBook", cascade = CascadeType.REMOVE, orphanRemoval = true)
     public Set<Book> books;
 
     @Override
