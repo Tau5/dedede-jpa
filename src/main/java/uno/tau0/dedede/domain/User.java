@@ -3,6 +3,8 @@ package uno.tau0.dedede.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +19,7 @@ public class User {
 
     @Getter @Setter
     public String surname;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    public Set<Commodate> commodates;
 }

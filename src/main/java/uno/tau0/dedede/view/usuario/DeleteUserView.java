@@ -15,7 +15,6 @@ public class DeleteUserView implements View {
     @Override
     public void run(Model model, ViewManager viewManager) {
         System.out.print("¿Estás segure (y/N)? ");
-        MenuHelper.sc.nextLine();
         String response = MenuHelper.sc.nextLine();
         if (response.equals("y")) {
             model.users.deleteById(user.getId());

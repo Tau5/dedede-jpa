@@ -15,7 +15,7 @@ public class Commodate {
     @Getter
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book")
     @Getter @Setter
     private Book book;
