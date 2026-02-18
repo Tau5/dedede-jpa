@@ -17,6 +17,13 @@ public class ViewIniciarSesion implements View {
             );
         });
 
+        if (model.users.count() < 1) {
+            System.out.println("No hay usuarios registrados");
+            viewManager.switchView(
+                new UserView()
+            );
+        }
+
         int chosen = -1;
         while (true) {
             if (model.users.existsById((long) chosen)) break;
