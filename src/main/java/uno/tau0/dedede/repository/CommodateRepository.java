@@ -1,5 +1,6 @@
 package uno.tau0.dedede.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
@@ -8,7 +9,7 @@ import uno.tau0.dedede.domain.Commodate;
 
 import java.util.List;
 
-public interface CommodateRepository extends ListCrudRepository<Commodate, Long> {
+public interface CommodateRepository extends JpaRepository<Commodate, Long> {
     List<Commodate> findByUserId(Long id);
     List<Commodate> findByBookId(Long id);
     @Query("select c from Commodate c where c.book.id = ?1 and c.returned = false")
